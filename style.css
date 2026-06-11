@@ -1,0 +1,25 @@
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #fff0f5;
+  text-align: center;
+}
+
+header {
+  background: linear-gradient(45deg, #ff4d6d, #ff85a1);
+  color: white;
+  padding: 20px;
+}
+
+#menu {
+  padding: 20px;
+}
+
+.card {
+  background: white;
+  margin: 10px auto;
+  padding: 15px;
+  width: 80%;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
