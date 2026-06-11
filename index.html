@@ -1,23 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+  <!-- Google Verification -->
+  <meta name="google-site-verification" content="ZvANbSQ98FfbirlRB16u0U-3OSeSK15f6hgiWySo8G8" />
+
   <meta charset="UTF-8">
-  <title>Fruit Shell 🍧</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Fruit Shell 🍧 - Ice Cream & Shakes</title>
+
   <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
 <header>
   <h1>🍧 Fruit Shell Ice Cream</h1>
-  <p>Natural fruit-based ice cream, shakes & mojitos</p>
+  <p>Fresh fruit-based ice creams, shakes & mojitos</p>
 </header>
 
+<!-- CART BAR -->
+<div class="cart-bar">
+  🛒 Cart Items: <span id="cart-count">0</span>
+  <button onclick="toggleCart()">View Cart</button>
+</div>
+
+<!-- MENU SECTION -->
 <section>
-  <h2>Menu</h2>
-  <div id="menu">Loading...</div>
+  <h2>Our Menu</h2>
+  <div id="menu">Loading delicious items...</div>
 </section>
 
+<!-- CART PANEL -->
+<div id="cart" class="cart">
+  <h2>Your Cart 🧺</h2>
+
+  <div id="cart-items"></div>
+
+  <h3>Total: ₹<span id="total">0</span></h3>
+
+  <button onclick="clearCart()">Clear Cart</button>
+</div>
+
 <script src="app.js"></script>
+
 </body>
 </html>
