@@ -1,25 +1,75 @@
 body {
   margin: 0;
-  font-family: Arial;
-  background: #fff0f5;
+  font-family: Arial, sans-serif;
+  background: #f4f6f9;
+}
+
+/* NAVBAR */
+header {
+  background: linear-gradient(135deg, #ff4b2b, #ff416c);
+  color: white;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* BUTTON */
+button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #111;
+  color: white;
+  transition: 0.2s;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+/* GRID */
+#menu {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+  padding: 20px;
+}
+
+/* CARD */
+.card {
+  background: white;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  text-align: center;
+  transition: 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+/* INPUTS */
+input {
+  width: 80%;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+/* CENTER LOGIN BOX */
+.center-box {
+  max-width: 350px;
+  margin: 80px auto;
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
   text-align: center;
 }
 
-header {
-  background: linear-gradient(45deg, #ff4d6d, #ff85a1);
-  color: white;
-  padding: 20px;
-}
 
-#menu {
-  padding: 20px;
-}
 
-.card {
-  background: white;
-  margin: 10px auto;
-  padding: 15px;
-  width: 80%;
-  border-radius: 12px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}

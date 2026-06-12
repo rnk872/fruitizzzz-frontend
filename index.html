@@ -2,53 +2,20 @@
 <html>
 <head>
   <title>Dashboard</title>
-  <script src="auth.js"></script>
 
-  <style>
-    body { font-family: Arial; margin: 0; }
-    header {
-      background: #ff6b6b;
-      color: white;
-      padding: 15px;
-      position: relative;
-      text-align: center;
-    }
-
-    #logoutBtn {
-      position: absolute;
-      right: 15px;
-      top: 10px;
-      background: black;
-      color: white;
-      padding: 8px;
-      border: none;
-      cursor: pointer;
-    }
-
-    #menu {
-      padding: 20px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 10px;
-    }
-
-    .card {
-      border: 1px solid #ddd;
-      padding: 10px;
-      border-radius: 8px;
-      text-align: center;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body onload="protectPage()">
 
 <header>
   <h2>🍓 Fruitizzzz Dashboard</h2>
-  <button id="logoutBtn" onclick="logout()">Logout</button>
+  <button onclick="logout()">Logout</button>
 </header>
 
 <div id="menu">Loading...</div>
+
+<script src="auth.js"></script>
 
 <script>
 const API = "https://fruitizzzz-backend.onrender.com/api/menu";
@@ -70,7 +37,7 @@ fetch(API)
       div.innerHTML = `
         <h3>${item.name}</h3>
         <p>₹${item.price}</p>
-        <button onclick="addToCart('${item._id}')">Add to Cart</button>
+        <button onclick="addToCart('${item._id}')">Add</button>
       `;
 
       menu.appendChild(div);
@@ -79,7 +46,7 @@ fetch(API)
 
 function addToCart(id) {
   const item = menuData.find(m => m._id === id);
-  alert(item.name + " added to cart");
+  alert(item.name + " added");
 }
 </script>
 
