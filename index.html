@@ -1,19 +1,34 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Dashboard</title>
+  <meta charset="UTF-8">
+  <title>Fruitizzzz Premium</title>
 
   <link rel="stylesheet" href="style.css">
 </head>
 
-<body onload="protectPage()">
+<body onload="initPage()">
 
 <header>
-  <h2>🍓 Fruitizzzz Dashboard</h2>
+  <h2>🍓 Fruitizzzz Premium</h2>
   <button onclick="logout()">Logout</button>
 </header>
 
-<div id="menu">Loading...</div>
+<!-- MENU -->
+<div id="menu" class="loading">Loading items...</div>
+
+<!-- PRODUCT MODAL -->
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+
+    <h2 id="modalName"></h2>
+    <p id="modalPrice"></p>
+    <p id="modalDesc">Fresh and delicious item 🍓</p>
+
+    <button id="addBtn">Add to Cart</button>
+  </div>
+</div>
 
 <script src="auth.js"></script>
 
@@ -22,31 +37,82 @@ const API = "https://fruitizzzz-backend.onrender.com/api/menu";
 
 let menuData = [];
 
-fetch(API)
-  .then(res => res.json())
-  .then(data => {
-    menuData = data;
+/* ======================
+   INIT PAGE
+====================== */
+function initPage() {
+  protectPage();
+  loadMenu();
+}
 
-    const menu = document.getElementById("menu");
+/* ======================
+   LOAD MENU
+====================== */
+async function loadMenu() {
+  const menu = document.getElementById("menu");
+
+  try {
+    const res = await fetch(API);
+    const data = await res.json();
+
+    menuData = data;
     menu.innerHTML = "";
 
-    data.forEach(item => {
+    data.forEach((item, i) => {
       const div = document.createElement("div");
       div.className = "card";
+      div.style.animation = `fadeIn 0.3s ease ${i * 0.05}s both`;
 
       div.innerHTML = `
         <h3>${item.name}</h3>
         <p>₹${item.price}</p>
-        <button onclick="addToCart('${item._id}')">Add</button>
+
+        <button onclick="openModal('${item.name}', ${item.price}, '${item._id}')">
+          View
+        </button>
       `;
 
       menu.appendChild(div);
     });
-  });
 
+  } catch (err) {
+    menu.innerHTML = "Failed to load items ❌";
+  }
+}
+
+/* ======================
+   MODAL FUNCTIONS
+====================== */
+function openModal(name, price, id) {
+  document.getElementById("modalName").innerText = name;
+  document.getElementById("modalPrice").innerText = "₹" + price;
+
+  const modal = document.getElementById("modal");
+  modal.style.display = "flex";
+
+  document.getElementById("addBtn").onclick = function () {
+    addToCart(id);
+    closeModal();
+  };
+}
+
+function closeModal() {
+  document.getElementById("modal").style.display = "none";
+}
+
+window.onclick = function (e) {
+  const modal = document.getElementById("modal");
+  if (e.target === modal) {
+    modal.style.display = "none";
+  }
+};
+
+/* ======================
+   CART (BASIC)
+====================== */
 function addToCart(id) {
   const item = menuData.find(m => m._id === id);
-  alert(item.name + " added");
+  alert(item.name + " added to cart 🛒");
 }
 </script>
 

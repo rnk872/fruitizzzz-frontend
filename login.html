@@ -4,19 +4,20 @@
   <title>Login</title>
 
   <link rel="stylesheet" href="style.css">
-  <script src="auth.js"></script>
 </head>
 
 <body>
 
 <div class="center-box">
-  <h2>Login</h2>
+  <h2>Welcome Back 👋</h2>
 
-  <input type="text" id="username" placeholder="Username"><br>
-  <input type="password" id="password" placeholder="Password"><br>
+  <input type="text" id="username" placeholder="Username">
+  <input type="password" id="password" placeholder="Password">
 
   <button onclick="login()">Login</button>
 </div>
+
+<script src="auth.js"></script>
 
 <script>
 const API = "https://fruitizzzz-backend.onrender.com";
@@ -27,15 +28,16 @@ async function login() {
 
   const res = await fetch(`${API}/api/auth/login`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {"Content-Type":"application/json"},
     body: JSON.stringify({ username, password })
   });
 
   const data = await res.json();
 
-  if (data.success) {
+  if(data.success){
     localStorage.setItem("token", data.token);
-    window.location.href = "index.html";
+    document.body.style.opacity = "0";
+    setTimeout(() => window.location.href = "index.html", 300);
   } else {
     alert(data.message);
   }
@@ -44,5 +46,3 @@ async function login() {
 
 </body>
 </html>
-
-
