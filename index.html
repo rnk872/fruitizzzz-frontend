@@ -2,13 +2,12 @@
 <html lang="en">
 <head>
 
-  <!-- Google Verification -->
   <meta name="google-site-verification" content="ZvANbSQ98FfbirlRB16u0U-3OSeSK15f6hgiWySo8G8" />
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Fruit Shell 🍧 - Ice Cream & Shakes</title>
+  <title>Fruit Shell 🍧</title>
 
   <link rel="stylesheet" href="style.css">
 
@@ -27,14 +26,15 @@
   <button onclick="toggleCart()">View Cart</button>
 </div>
 
-<!-- MENU SECTION -->
+<!-- MENU -->
 <section>
   <h2>Our Menu</h2>
-  <div id="menu">Loading delicious items...</div>
+  <div id="menu">Loading menu...</div>
 </section>
 
 <!-- CART PANEL -->
 <div id="cart" class="cart">
+
   <h2>Your Cart 🧺</h2>
 
   <div id="cart-items"></div>
@@ -42,6 +42,10 @@
   <h3>Total: ₹<span id="total">0</span></h3>
 
   <button onclick="clearCart()">Clear Cart</button>
+
+  <!-- CHECKOUT BUTTON -->
+  <button onclick="placeOrder()">Place Order 🚀</button>
+
 </div>
 
 <script src="app.js"></script>
