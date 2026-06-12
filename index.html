@@ -1,54 +1,87 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
+  <title>Dashboard</title>
+  <script src="auth.js"></script>
 
-  <meta name="google-site-verification" content="ZvANbSQ98FfbirlRB16u0U-3OSeSK15f6hgiWySo8G8" />
+  <style>
+    body { font-family: Arial; margin: 0; }
+    header {
+      background: #ff6b6b;
+      color: white;
+      padding: 15px;
+      position: relative;
+      text-align: center;
+    }
 
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    #logoutBtn {
+      position: absolute;
+      right: 15px;
+      top: 10px;
+      background: black;
+      color: white;
+      padding: 8px;
+      border: none;
+      cursor: pointer;
+    }
 
-  <title>Fruit Shell 🍧</title>
+    #menu {
+      padding: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px;
+    }
 
-  <link rel="stylesheet" href="style.css">
-
+    .card {
+      border: 1px solid #ddd;
+      padding: 10px;
+      border-radius: 8px;
+      text-align: center;
+    }
+  </style>
 </head>
 
-<body>
+<body onload="protectPage()">
 
 <header>
-  <h1>🍧 Fruit Shell Ice Cream</h1>
-  <p>Fresh fruit-based ice creams, shakes & mojitos</p>
+  <h2>🍓 Fruitizzzz Dashboard</h2>
+  <button id="logoutBtn" onclick="logout()">Logout</button>
 </header>
 
-<!-- CART BAR -->
-<div class="cart-bar">
-  🛒 Cart Items: <span id="cart-count">0</span>
-  <button onclick="toggleCart()">View Cart</button>
-</div>
+<div id="menu">Loading...</div>
 
-<!-- MENU -->
-<section>
-  <h2>Our Menu</h2>
-  <div id="menu">Loading menu...</div>
-</section>
+<script>
+const API = "https://fruitizzzz-backend.onrender.com/api/menu";
 
-<!-- CART PANEL -->
-<div id="cart" class="cart">
+let menuData = [];
 
-  <h2>Your Cart 🧺</h2>
+fetch(API)
+  .then(res => res.json())
+  .then(data => {
+    menuData = data;
 
-  <div id="cart-items"></div>
+    const menu = document.getElementById("menu");
+    menu.innerHTML = "";
 
-  <h3>Total: ₹<span id="total">0</span></h3>
+    data.forEach(item => {
+      const div = document.createElement("div");
+      div.className = "card";
 
-  <button onclick="clearCart()">Clear Cart</button>
+      div.innerHTML = `
+        <h3>${item.name}</h3>
+        <p>₹${item.price}</p>
+        <button onclick="addToCart('${item._id}')">Add to Cart</button>
+      `;
 
-  <!-- CHECKOUT BUTTON -->
-  <button onclick="placeOrder()">Place Order 🚀</button>
+      menu.appendChild(div);
+    });
+  });
 
-</div>
-
-<script src="app.js"></script>
+function addToCart(id) {
+  const item = menuData.find(m => m._id === id);
+  alert(item.name + " added to cart");
+}
+</script>
 
 </body>
 </html>
