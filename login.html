@@ -22,26 +22,30 @@
 const API = "https://fruitizzzz-backend.onrender.com";
 
 async function login() {
-  const username = document.getElementById("username").value;
-  const password = document.getElementById("password").value;
+  try {
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
 
-  const res = await fetch(`${API}/api/auth/login`, {
-    method: "POST",
-    headers: {"Content-Type":"application/json"},
-    body: JSON.stringify({ username, password })
-  });
+    const res = await fetch(`${API}/api/auth/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, password })
+    });
 
-  const data = await res.json();
+    const data = await res.json();
 
-  if(data.success){
-    localStorage.setItem("token", data.token);
-    document.body.style.opacity = "0";
-    setTimeout(() => window.location.href = "index.html", 300);
-  } else {
-    alert(data.message);
+    if (data.success) {
+      localStorage.setItem("token", data.token);
+      document.body.style.opacity = "0";
+      setTimeout(() => {
+        window.location.href = "index.html";
+      }, 300);
+    } else {
+      alert(data.message);
+    }
+
+  } catch (err) {
+    alert("ERROR: " + err.message);
+    console.log(err);
   }
 }
-</script>
-
-</body>
-</html>
